@@ -48,6 +48,15 @@ require("lazy").setup({
       },
     })
 
+    local function open_nvim_tree()
+	    if vim.fn.argc() == 0 then
+		    require("nvim-tree.api").tree.open()
+	    end
+    end
+    vim.api.nvim_create_autocmd("VimEnter",{
+	    callback=open_nvim_tree,
+    })
+
     vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle File Tree' })
     vim.keymap.set('n', '<leader>f', ':NvimTreeFocus<CR>', { desc = 'Focus File Tree' })
   end,
@@ -85,4 +94,9 @@ require("lazy").setup({
  }) 
 vim.opt.number = true
 vim.opt.relativenumber = true
-
+--vim.opt.mouse ="a"
+--vim.keymap.set({'n', 'v', 'i'}, '<MiddleMouse>', '<Nop>')
+--vim.keymap.set({'n', 'v', 'i'}, '<2-MiddleMouse>', '<Nop>')
+--vim.keymap.set({'n', 'v', 'i'}, '<3-MiddleMouse>', '<Nop>')
+--vim.keymap.set({'n', 'v', 'i'}, '<4-MiddleMouse>', '<Nop>')
+--vim.keymap.set({'n', 'v', 'i'}, '<RightMouse>', '<Nop>')
