@@ -19,14 +19,17 @@ require("lazy").setup({
     config = function()
       local builtin = require('telescope.builtin')
       -- 设置快捷键 (以空格为空缀键)
---      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
---      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>ff', function()        -- ← 改这行
-   	 builtin.find_files({ hidden = true })
-    end, {})
-    vim.keymap.set('n', '<leader>fg', function()        -- ← 改这行
+      --vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+      --vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+
+
+
+      vim.keymap.set('n', '<leader>ff', function()        -- ← 改这行
+      	builtin.find_files({ hidden = true })
+     	end, {})
+      vim.keymap.set('n', '<leader>fg', function()        -- ← 改这行
     	builtin.live_grep({ additional_args = { "--hidden" } })
-    end, {})
+  	end, {})
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     end
@@ -97,74 +100,12 @@ require("lazy").setup({
   end,
 },
 
--- 1. LSP 管理器 (Mason)
-  {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "pyright", "lua_ls", "ts_ls" } -- 自动安装你需要的语言服务器
-      })
-    end,
-  },
-
-  -- 2. 核心 LSP 配置 (lspconfig)
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      --local lspconfig = require('lspconfig')
-      --local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-      -- 配置具体的语言服务器
-      --lspconfig.pyright.setup({ capabilities = capabilities })
-      --lspconfig.lua_ls.setup({ capabilities = capabilities })
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      vim.lsp.config('pyright', { capabilities = capabilities })
-      vim.lsp.config('lua_ls', { capabilities = capabilities })
-      vim.lsp.enable({ 'pyright', 'lua_ls' })
-    end,
-  },
-
-  -- 3. 自动补全引擎 (nvim-cmp)
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp", -- 让 cmp 支持 lsp 来源
-      "hrsh7th/cmp-buffer",   -- 让 cmp 支持当前文件内容
-      "L3MON4D3/LuaSnip",     -- 代码片段支持
-    },
-    config = function()
-      local cmp = require('cmp')
-      cmp.setup({
-        snippet = {
-          expand = function(args) require('luasnip').lsp_expand(args.body) end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- 回车确认补全
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'buffer' },
-        })
-      })
-    end,
-  }
-
  }) 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.mouse ="a"
-vim.opt.mousemodel="popup"
+--vim.opt.mouse ="a"
 --vim.keymap.set({'n', 'v', 'i'}, '<MiddleMouse>', '<Nop>')
 --vim.keymap.set({'n', 'v', 'i'}, '<2-MiddleMouse>', '<Nop>')
 --vim.keymap.set({'n', 'v', 'i'}, '<3-MiddleMouse>', '<Nop>')
 --vim.keymap.set({'n', 'v', 'i'}, '<4-MiddleMouse>', '<Nop>')
-
+--vim.keymap.set({'n', 'v', 'i'}, '<RightMouse>', '<Nop>')
