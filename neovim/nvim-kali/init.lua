@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+--------------------------telescope--------------------------
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
@@ -31,7 +32,7 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     end
   },
-
+------------------------------nvim-tree--------------------------------
 {
   "nvim-tree/nvim-tree.lua",
   version = "*",
@@ -67,7 +68,7 @@ require("lazy").setup({
     vim.keymap.set('n', '<leader>f', ':NvimTreeFocus<CR>', { desc = 'Focus File Tree' })
   end,
 },
-
+--------------------------------lualine-----------------------
   {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -78,26 +79,49 @@ require("lazy").setup({
     }
   }
 },
-{
-  "xiyaowong/transparent.nvim",
-  lazy = false, -- 必须是 false
-  priority = 1000, -- 提升优先级，确保它在主题加载后生效
-  config = function()
-    require("transparent").setup({
-      extra_groups = {
-        "NvimTreeNormal",
-        "NvimTreeNormalNC",
-        "NvimTreeEndOfBuffer",
-        "NvimTreeWinSeparator",
-        "NormalFloat",
-      },
-    })
-    -- 自动执行一次开启命令
-    vim.cmd("TransparentEnable")
-  end,
-},
 
--- 1. LSP 管理器 (Mason)
+
+-----------------Catppuccin 配置 ---------------------------------
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- 确保是 mocha
+        transparent_background = true,
+        term_colors = true,
+        integrations = {
+          treesitter = true,
+          native_lsp = { enabled = true },
+          telescope = { enabled = true },
+          nvimtree = true,
+        },
+      })
+      vim.cmd.colorscheme "catppuccin"
+    end,
+  },
+-------------------------------transparent-----------------------
+--{
+--  "xiyaowong/transparent.nvim",
+--  lazy = false, -- 必须是 false
+--  priority = 1000, -- 提升优先级，确保它在主题加载后生效
+--  config = function()
+--    require("transparent").setup({
+--      extra_groups = {
+--        "NvimTreeNormal",
+--        "NvimTreeNormalNC",
+--        "NvimTreeEndOfBuffer",
+--        "NvimTreeWinSeparator",
+--        "NormalFloat",
+--      },
+--    })
+--    -- 自动执行一次开启命令
+--    vim.cmd("TransparentEnable")
+--  end,
+--},
+
+---------------------------- 1. LSP 管理器 (Mason)
   {
     "williamboman/mason.nvim",
     config = function()
@@ -113,7 +137,7 @@ require("lazy").setup({
     end,
   },
 
-  -- 2. 核心 LSP 配置 (lspconfig)
+  ------------------------------ 2. 核心 LSP 配置 (lspconfig)
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -130,7 +154,7 @@ require("lazy").setup({
     end,
   },
 
-  -- 3. 自动补全引擎 (nvim-cmp)
+  --------------------------------- 3. 自动补全引擎 (nvim-cmp)
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -156,7 +180,18 @@ require("lazy").setup({
         })
       })
     end,
-  }
+  },
+---------------------------- 'akinsho/toggleterm.nvim'--------------------------
+{
+  'akinsho/toggleterm.nvim',
+  version = "*",
+  config = function()
+    require("toggleterm").setup({
+      open_mapping = [[<c-\>]], -- 快捷键切换
+      direction = 'float',      -- 浮窗模式
+    })
+  end
+}
 
  }) 
 vim.opt.number = true

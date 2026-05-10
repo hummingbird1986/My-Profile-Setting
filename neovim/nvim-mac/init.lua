@@ -77,7 +77,39 @@ require("lazy").setup({
       vim.cmd.colorscheme "catppuccin"
     end,
   },
+  -- 1. Lualine 配置
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      options = {
+        -- 既然你下面用了 catppuccin，这里建议主题也同步，视觉更统一
+        theme = 'catppuccin', 
+        icons_enabled = true,
+      }
+    },
+  },
 
+  -- 2. Catppuccin 配置 (修复了你截图中的语法错误)
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- 确保是 mocha
+        transparent_background = true,
+        term_colors = true,
+        integrations = {
+          treesitter = true,
+          native_lsp = { enabled = true },
+          telescope = { enabled = true },
+          nvimtree = true,
+        },
+      })
+      vim.cmd.colorscheme "catppuccin"
+    end,
+  },
 -----------------------------akinsho/toggleterm.nvim------------------------------
 {
   'akinsho/toggleterm.nvim',
