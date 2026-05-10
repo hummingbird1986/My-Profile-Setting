@@ -12,6 +12,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+
+-----------------------------nvim-telescope-------------------------------
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
@@ -25,7 +27,7 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
     end
   },
-
+---------------------------nvim-tree---------------------------------------
 {
   "nvim-tree/nvim-tree.lua",
   version = "*",
@@ -52,7 +54,7 @@ require("lazy").setup({
     vim.keymap.set('n', '<leader>f', ':NvimTreeFocus<CR>', { desc = 'Focus File Tree' })
   end,
 },
-
+---------------------------nvim-lualine---------------------------------------
   {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -63,7 +65,7 @@ require("lazy").setup({
     }
   }
 },
-
+------------------------catppuccin/nvim------------------------------------------
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -76,6 +78,17 @@ require("lazy").setup({
     end,
   },
 
+-----------------------------akinsho/toggleterm.nvim------------------------------
+{
+  'akinsho/toggleterm.nvim',
+  version = "*",
+  config = function()
+    require("toggleterm").setup({
+      open_mapping = [[<c-\>]], -- 快捷键切换
+      direction = 'float',      -- 浮窗模式
+    })
+  end
+}
 }) 
 
 -- 显示绝对行号
