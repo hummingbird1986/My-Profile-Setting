@@ -14,15 +14,12 @@
 git clone https://github.com/zsh-users/zsh-autosuggestions \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# 2. F-Sy-H (Fast Syntax Highlighting)
-git clone https://github.com/z-shell/F-Sy-H \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/F-Sy-H
+# 2. fast-syntax-highlighting
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 
-# 3. zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# 4. zsh-autocomplete
+# 3. zsh-autocomplete
 git clone https://github.com/marlonrichert/zsh-autocomplete \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
 ```
@@ -36,9 +33,9 @@ git clone https://github.com/marlonrichert/zsh-autocomplete \
 ```zsh
 plugins=(
   git
+  tmux
   zsh-autosuggestions
-  F-Sy-H
-  zsh-syntax-highlighting
+  fast-syntax-highlighting 
   zsh-autocomplete
 )
 ```
